@@ -42,6 +42,10 @@ echo "user_overlays=fan-control" >> /boot/armbianEnv.txt
 
 echo "celestial-homelab" > /etc/hostname
 
+# mpd
+cp /tmp/overlay/mpd.conf /etc/mpd.conf
+systemctl enable mpd
+
 # containers
 mkdir -p /etc/containers/systemd/
 cp /tmp/overlay/containers/* /etc/containers/systemd/
