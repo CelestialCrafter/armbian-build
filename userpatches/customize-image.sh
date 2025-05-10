@@ -27,3 +27,9 @@ systemctl disable apt-daily-upgrade.timer
 systemctl disable dpkg-db-backup.timer
 systemctl disable man-db.timer
 
+# misc
+armbian-add-overlay /tmp/overlay/fan-control.dts
+echo "user_overlays=fan-control" >> /boot/armbianEnv.txt
+
+echo "celestial-homelab" > /etc/hostname
+
