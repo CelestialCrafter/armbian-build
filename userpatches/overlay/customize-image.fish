@@ -47,6 +47,7 @@ cp /tmp/overlay/mpd.conf /etc/mpd.conf
 systemctl enable mpd
 
 # containers
+podman load -i /tmp/overlay/celestials-closet.tar
 mkdir -p /etc/containers/systemd/
 cp /tmp/overlay/containers/* /etc/containers/systemd/
 
