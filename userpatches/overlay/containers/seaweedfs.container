@@ -1,0 +1,16 @@
+[Unit]
+Description=SeaweedFS Container
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+Image=docker.io/chrislusf/seaweedfs
+PublishPort=7333:7333
+Exec=server -filer -webdav
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=60
+
+[Install]
+WantedBy=default.target

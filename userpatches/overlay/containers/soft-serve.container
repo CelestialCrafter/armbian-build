@@ -1,0 +1,16 @@
+[Unit]
+Description=Soft Serve Containe
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+Image=ghcr.io/charmbracelet/soft-serve
+Environment=SOFT_SERVE_INITIAL_ADMIN_KEYS=ADMIN_KEY
+PublishPort=23:23231
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=60
+
+[Install]
+WantedBy=default.target

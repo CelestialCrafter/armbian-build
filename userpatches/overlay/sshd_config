@@ -1,0 +1,5 @@
+PermitRootLogin no
+PasswordAuthentication no
+UsePAM yes
+GatewayPorts yes
+X11Forwarding no
