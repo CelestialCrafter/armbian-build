@@ -1,0 +1,16 @@
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    INTERFACE:
+      dhcp4: true
+      dhcp6: true
+      access-points:
+        "SSID":
+          password: "PASSWORD"
+      nameservers:
+        addresses:
+          - 1.1.1.1
+          - 1.0.0.1
+          - 8.8.8.8
+          - 8.8.4.4
