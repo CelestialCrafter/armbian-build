@@ -30,4 +30,4 @@ Dockerfile
 .dockerignore
 
 userpatches/overlay/settings.json
-userpatches/overlay/celestial-homelab_ed25519
+userpatches/overlay/*_ed25519

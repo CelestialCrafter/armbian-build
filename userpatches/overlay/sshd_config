@@ -1,0 +1,6 @@
+HostKey /etc/ssh/celestial-homelab_ed25519
+PermitRootLogin no
+PasswordAuthentication no
+GatewayPorts yes
+UsePAM no
+X11Forwarding no

@@ -1,0 +1,11 @@
+{
+    "wifi": {
+        "interface": "wlP2p33s0",
+        "ssid": "Living the Dream",
+        "password": "ThankYou"
+    },
+    "passwords": {
+        "root": "$y$j9T$SXowJKFDdBTRUrDV1VSWs0$EXXmeEnofI4gbSpNIglW9XkMeK6RJIi1.4C/A2KZwE4",
+        "celestial": "$y$j9T$.iZJXMb9YAssZxIt6JHVj.$K9pxEkVxRl9k1AadYtb2z/TMgk0EJz0ohKYpr/wBYl1"
+    }
+}

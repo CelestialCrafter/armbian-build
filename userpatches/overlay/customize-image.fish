@@ -13,13 +13,13 @@ end
 
 # wifi
 INTERFACE=(jq -r '.wifi.interface' $SETTINGS_PATH)
-awk \
+install -m 600 (awk \
     -v iface=$INTERFACE \
     -v ssid="$(jq -r '.wifi.ssid' $SETTINGS_PATH)" \
     -v pw="$(jq -r '.wifi.password' $SETTINGS_PATH)" \
     '{gsub(/SSID/, ssid); gsub(/PASSWORD/, pw); gsub(/INTERFACE/, iface)}1' \
-    /tmp/overlay/wifi.yaml > /etc/netplan/20-wifi.yaml
-chmod 600 /etc/netplan/20-wifi.yaml
+    /tmp/overlay/wifi.yaml | psub) \
+    /etc/netplan/20-wifi.yaml
 
 mkdir -p /etc/systemd/system/systemd-networkd-wait-online.service.d
 echo "[Service]
@@ -42,6 +42,10 @@ echo "user_overlays=fan-control" >> /boot/armbianEnv.txt
 
 echo "celestial-homelab" > /etc/hostname
 
+# ssh
+install -o root -g root /tmp/overlay/celestial-homelab_ed25519 /etc/ssh/celestial-homelab_ed25519
+cp /tmp/overlay/sshd_config /etc/ssh/sshd_config.d/overlay.conf
+
 # mpd
 cp /tmp/overlay/mpd.conf /etc/mpd.conf
 systemctl enable mpd
@@ -50,8 +54,4 @@ systemctl enable mpd
 podman load -i /tmp/overlay/celestials-closet.tar
 mkdir -p /etc/containers/systemd/
 cp /tmp/overlay/containers/* /etc/containers/systemd/
-
-awk -v key="$(jq -r '.soft_serve_admin_key' $SETTINGS_PATH)" \
-    '{gsub(/SS_ADMIN_KEY/, key)}1' \
-    /tmp/overlay/containers/soft-serve.container > /etc/containers/systemd/soft-serve.container
 
