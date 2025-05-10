@@ -1,0 +1,22 @@
+[Unit]
+Description=Minecraft Container
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+Image=docker.io/itzg/minecraft-server
+Environment=GID=0
+Environment=UID=0
+Environment=INIT_MEMORY=1G
+Environment=MAX_MEMORY=4G
+Environment=MODPACK_PLATFORM=MODRINTH
+Environment=MODRINTH_MODPACK=/data/pack.mrpack
+PublishPort=25565:25565
+Volume=/var/lib/minecraft:/data
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=60
+
+[Install]
+WantedBy=default.target

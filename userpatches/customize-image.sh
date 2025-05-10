@@ -1,5 +1,9 @@
 SETTINGS_PATH="/tmp/overlay/settings.json"
 
+# packages
+apt-get update
+apt-get install -y vim podman catatonit nftables git
+
 # wifi
 INTERFACE="$(jq -r '.wifi.interface' $SETTINGS_PATH)"
 cat /tmp/overlay/wifi.yaml
@@ -32,4 +36,12 @@ armbian-add-overlay /tmp/overlay/fan-control.dts
 echo "user_overlays=fan-control" >> /boot/armbianEnv.txt
 
 echo "celestial-homelab" > /etc/hostname
+
+# containers
+mkdir -p /etc/containers/systemd/
+cp /tmp/overlay/containers/* /etc/containers/systemd/
+
+awk -v key="$(jq -r '.soft_serve_admin_key' $SETTINGS_PATH)" \
+    '{gsub(/SS_ADMIN_KEY/, key)}1' \
+    /tmp/overlay/containers/soft-serve.container > /etc/containers/systemd/soft-serve.container
 
